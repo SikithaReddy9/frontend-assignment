@@ -1,10 +1,12 @@
 import React from 'react'
 
-interface ButtonProps {
-  children: React.ReactNode
+export interface ButtonProps {
+  children?: React.ReactNode
   onClick?: () => void
   disabled?: boolean
   variant?: 'primary' | 'secondary'
+  size?: 'small' | 'medium' | 'large'
+  label?: string
 }
 
 export default function Button({
@@ -12,6 +14,16 @@ export default function Button({
   onClick,
   disabled = false,
   variant = 'primary',
-}: ButtonProps) {
-  // ...rest of your component
+  size = 'medium',
+  label,
+}: ButtonProps): JSX.Element {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`btn ${variant} ${size}`}
+    >
+      {children ?? label}
+    </button>
+  )
 }
