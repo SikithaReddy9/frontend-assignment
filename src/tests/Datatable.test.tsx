@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import DataTable from '../components/DataTable';
+import { DataTable } from '../components/DataTable'
+
 
 describe('DataTable', () => {
   test('renders headers and rows correctly', () => {
