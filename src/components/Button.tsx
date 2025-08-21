@@ -1,29 +1,15 @@
 import React from 'react'
 
 export interface ButtonProps {
-  children?: React.ReactNode
+  children: React.ReactNode
   onClick?: () => void
-  disabled?: boolean
-  variant?: 'primary' | 'secondary'
-  size?: 'small' | 'medium' | 'large'
-  label?: string
+  testId?: string
 }
 
-export default function Button({
-  children,
-  onClick,
-  disabled = false,
-  variant = 'primary',
-  size = 'medium',
-  label,
-}: ButtonProps): JSX.Element {
+export const Button = ({ children, onClick, testId }: ButtonProps) => {
   return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className={`btn ${variant} ${size}`}
-    >
-      {children ?? label}
+    <button onClick={onClick} data-testid={testId}>
+      {children}
     </button>
   )
 }

@@ -1,12 +1,12 @@
 import React from 'react'
 
-type InputFieldProps = {
+export type InputFieldProps = {
   label: string
   value?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
   placeholder?: string
   helperText?: string
-  errorMessage?: string
+  error?: string
   disabled?: boolean
   invalid?: boolean
   loading?: boolean
@@ -20,13 +20,13 @@ export default function InputField({
   onChange,
   placeholder,
   helperText,
-  errorMessage,
+  error,
   disabled = false,
   invalid = false,
   loading = false,
   variant = 'outlined',
   size = 'md',
-}: InputFieldProps) {
+}: InputFieldProps): JSX.Element {
   const id = React.useId()
 
   const sizeStyles = {
@@ -52,15 +52,10 @@ export default function InputField({
 
   return (
     <div className="w-full">
-      {/* Label */}
-      <label
-        htmlFor={id}
-        className="mb-1 block text-sm font-medium text-gray-700"
-      >
+      <label htmlFor={id} className="mb-1 block text-sm font-medium text-gray-700">
         {label}
       </label>
 
-      {/* Input */}
       <div className="relative">
         <input
           id={id}
@@ -73,7 +68,7 @@ export default function InputField({
           aria-describedby={
             helperText && !invalid
               ? `${id}-helper`
-              : invalid && errorMessage
+              : invalid && error
               ? `${id}-error`
               : undefined
           }
@@ -81,17 +76,15 @@ export default function InputField({
         />
       </div>
 
-      {/* Helper text */}
       {helperText && !invalid && (
         <p id={`${id}-helper`} className="mt-1 text-sm text-gray-500">
           {helperText}
         </p>
       )}
 
-      {/* Error message */}
-      {errorMessage && invalid && (
+      {error && invalid && (
         <p id={`${id}-error`} role="alert" className="mt-1 text-sm text-red-500">
-          {errorMessage}
+          {error}
         </p>
       )}
     </div>
